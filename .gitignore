@@ -1,0 +1,44 @@
+# Some information was taken from:
+# https://cran.r-project.org/web/packages/gitignore/readme/README.html
+
+.Rproj.user
+.Rhistory
+.Rapp.history
+.RData
+.Ruserdata
+.here
+
+# No RData files
+*.RData
+
+# No csv files
+*.csv
+
+# No html files
+*.html
+
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
+
+# knitr and R markdown default cache directories
+*_cache/
+/cache/
+
+# pdfs
+*.pdf
+*.PDF
+
+# figs folder
+figs/
+*.PNG
+*.png
+*.JPEG
+*.jpeg
+*.JPG
+*.jpg
+
+# Folders (some of them with data)
+documents
+04-r-objects
+data
