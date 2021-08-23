@@ -1,3 +1,6 @@
+# This is a first approach to building a web-app that calculates HF probability
+# based on the HF score project - here we use RSF models for testing purposes
+
 library(shiny)
 library(ranger)
 
@@ -45,8 +48,6 @@ ui <- fluidPage(
         # Main panel for displaying outputs
         mainPanel(
             titlePanel("Here goes the output"),
-            tableOutput("table"),
-            textOutput("sum"),
             textOutput("prediction")
             
         )
@@ -65,23 +66,13 @@ server <- function(input, output, session) {
         )
     })
     
-    output$table <- renderTable({
-        new_data()
-    })
-    
-    output$sum <- renderText({
-        data <- new_data()
-        paste0("The sum of your inputs is: ",
-               sum(data$karno, data$diagtime))
-    })
-    
     output$prediction <- renderText({
         data <- new_data()
         pred <- predict(rsf_model, data)
         pred_matrix <- pred[["survival"]]
         v <- which(pred[["unique.death.times"]] >= 5)
         
-        paste0("Your risk is: ",
+        paste0("Your estimated risk for HF within 5 years is: ",
         round(pred_matrix[v[1]], 2), "%."
         )
     })
