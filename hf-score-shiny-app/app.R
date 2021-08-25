@@ -8,142 +8,25 @@ load(file = paste0(here::here(), "/hf-score-shiny-app/rsf_primary.RData"))
 
 # Define UI for application
 ui <- fluidPage(
-        # Application title
-        titlePanel("Biomarcare Heart Failure Score Calculator"),
         
-        
-        sidebarPanel(
-            img(src = "biomarcare.png", width = 150),
-            hr(),
-            actionButton("enter", label = "Calculate Risk"),
-            width = 2,
-            hr(),
-            
-            # Output
-            textOutput("prediction"),
-            hr(),
-            ),
-        
-        # Main panel
-        mainPanel(
-            # Info text
-            p("The Biomarker for Cardiovascular Risk Assessment across Europe (BiomarCaRE) consortium is an EU-funded consortium including over 30 partner from academia and industry. BiomarCaRE aims to determine the value of established and emerging biomarkers to improve risk estimation of cardiovascular disease in Europe. BiomarCaRE relies on an exceptional resource of large scale epidemiological cohorts with long term follow-up and available bio specimens based on the population of the MORGAM Project as well as several cardiovascular disease cohorts and clinical trials. Uniquely, all epidemiological and clinical phenotypes as well as disease outcomes have been harmonized in a joint data base. Within BiomarCaRE, an interdisciplinary team with various expertise, the value of established and emerging biomarkers is determined across the cohorts using innovative approaches and technologies.")
-            ),
-        hr(),
-            
-        
-        # Enter information below - statement
-        fluidRow(
-            column(10,
-                   p("Enter your information below:"),
-                   hr()
-                   )
-        ),
-        
-        # Inputs for the predictor variables
-        fluidRow(
-            column(2,
-                wellPanel(
-                    numericInput(
-                        inputId = "age1",
-                        label = "Age in years",
-                        value = 50,
-                        min = 50,
-                        max = 100,
-                        step = 1
-                    ),
-                    hr(),
-                    selectInput(
-                        inputId = "male",
-                        label = "Sex",
-                        choices = c(0, 1),
-                        selected = 0
-                    ),
-                    hr(),
-                )
-            ),
-            column(2,
-                wellPanel(
-                    numericInput(
-                        inputId = "bmi",
-                        label = "Body Mass Index",
-                        value = 25,
-                        min = 15,
-                        max = 60,
-                        step = 0.1
-                    ),
-                    hr(),
-                    selectInput(
-                        inputId = "basediab1",
-                        label = "Diabetes",
-                        choices = c(0, 1),
-                        selected = 0
-                    ),
-                    hr(),
-                )
-            ),
-            column(2,
-                wellPanel(
-                    selectInput(
-                        inputId = "drug_hypert",
-                        label = "Hypertension Medication",
-                        choices = c(0, 1),
-                        selected = 0
-                    ),
-                    hr(),
-                    selectInput(
-                        inputId = "dsmoker",
-                        label = "Daily Smoker",
-                        choices = c(0, 1),
-                        selected = 0
-                    ),
-                    hr(),
-                )
-            ),
-            column(2,
-                wellPanel(
-                    selectInput(
-                        inputId = "basemi2",
-                        label = "Myocardial Infarction in the past",
-                        choices = c(0, 1),
-                        selected = 0
-                    ),
-                    hr(),
-                    numericInput(
-                        inputId = "alcave",
-                        label = "Alcohol consumption",
-                        value = 0,
-                        min = 0,
-                        max = 40,
-                        step = 1
-                    ),
-                    hr(),
-                )
-            ),
-            column(2,
-                wellPanel(
-                    numericInput(
-                        inputId = "systm",
-                        label = "Systolic Blood Pressure",
-                        value = 80,
-                        min = 50,
-                        max = 250,
-                        step = 1
-                    ),
-                    hr(),
-                    numericInput(
-                        inputId = "nt_pro_bnp",
-                        label = "Levels of NT-proBNP",
-                        value = 25,
-                        min = 0,
-                        max = 100,
-                        step = 0.1
-                    ),
-                    hr()
-                )
-            )
-        )
-)
+        # Define navigation bar
+        shinyUI(
+            navbarPage("European Heart Failure Score",
+                       
+                       tabPanel("Start" ,
+                                source("start.R")$value
+                        ),
+                        
+                       navbarMenu("Choose Model",
+                            tabPanel("Model 1",
+                                     source("model1.R")$value)
+                        ),
+                        tabPanel("About",
+                                     source("the_score.R")$value)
+                       
+            ) # close navbarPage
+        ), # close shinyUI
+) # close fluidPage
 
 # Define server logic required to predict from the rsf model
 server <- function(input, output, session) {
@@ -174,7 +57,7 @@ server <- function(input, output, session) {
         )
     })
     
-}
+} # close server function 
 
 # Run the application 
 shinyApp(ui = ui, server = server)
