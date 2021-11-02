@@ -1,8 +1,13 @@
 # The Shiny web-app that calculates 5-year risk for incident HF based on the developed score
 library(shiny)
 library(survival)
+library(pmisc)
 
-load(file = paste0(here::here(), "/hf-score-shiny-app/cox_primary.RData"))
+# Load Cox-models for prediction
+load(file = c(paste0(here::here(),
+                     "/hf-score-shiny-app/pred_model_primary.RData")))
+load(file = c(paste0(here::here(),
+                     "/hf-score-shiny-app/pred_model_secondary.RData")))
 
 # Define UI for application
 ui <- fluidPage(
@@ -16,7 +21,7 @@ ui <- fluidPage(
                         ),
                         
                        navbarMenu("Choose Model",
-                            tabPanel("Model 1",
+                            tabPanel("Clinical Score",
                                      source("model1.R")$value)
                         ),
                         tabPanel("About",
@@ -26,22 +31,22 @@ ui <- fluidPage(
         ), # close shinyUI
 ) # close fluidPage
 
-# Define server logic required to predict from the Cox model
+# Define server logic required to predict from the Cox-model
 server <- function(input, output, session) {
     
     new_data <- eventReactive(input$enter, {
         data.frame(
-            bmi = input$bmi,
-            dsmoker = input$dsmoker,
-            drug_hypert = input$drug_hypert,
-            basediab1 = input$basediab1,
-            basemi2 = input$basemi2,
-            alcave = input$alcave,
-            systm = input$systm,
-            age1 = input$age1,
-            male = input$male,
+            bmi           = input$bmi,
+            dsmoker       = input$dsmoker,
+            drug_hypert   = input$drug_hypert,
+            basediab1     = input$basediab1,
+            basemi2       = input$basemi2,
+            alcave        = input$alcave,
+            systm         = input$systm,
+            age1          = input$age1,
+            male          = input$male,
             nt_pro_bnp_ln = log(input$nt_pro_bnp),
-            stringsAsFactors = FALSE
+        stringsAsFactors = FALSE
         )
     })
 
