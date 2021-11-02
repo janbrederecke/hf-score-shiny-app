@@ -21,7 +21,7 @@ ui <- fluidPage(
                         ),
                         
                        navbarMenu("Choose Model",
-                            tabPanel("Clinical Score",
+                            tabPanel("Biomarker Score",
                                      source("model1.R")$value)
                         ),
                         tabPanel("About",
@@ -41,8 +41,9 @@ server <- function(input, output, session) {
             drug_hypert   = input$drug_hypert,
             basediab1     = input$basediab1,
             basemi2       = input$basemi2,
-            alcave        = input$alcave,
+            alcave_ln        = log(input$alcave),
             systm         = input$systm,
+            diastm        = input$diastm,
             age1          = input$age1,
             male          = input$male,
             nt_pro_bnp_ln = log(input$nt_pro_bnp),
@@ -53,14 +54,22 @@ server <- function(input, output, session) {
     output$prediction <- renderText({
         data <- new_data()
         
+
         
-        ########### Change to Cox model!!!!#########
-        pred <- predict(rsf_model, data)
-        pred_matrix <- pred[["survival"]]
-        v <- which(pred[["unique.death.times"]] >= (365.25*5))
+
+        # PROBLEM: PREDICTION USING Wb_Event_Prob() and other functions 
+        # that use Age as the time scale and can be limited to 5 years all
+        # ask for the training data... FOE?
+ 
+
+            
+        
+        
+        
+        
         
         paste0("Your estimated risk for HF within 5 years is: ",
-        round((1 - pred_matrix[v[1]]) * 100, 2), "%."
+        round((event_prob_5) * 100, 2), "%."
         )
     })
     

@@ -135,6 +135,20 @@ fluidRow(
   div(style = "display: inline-block;
       vertical-align: top;
       width: 200px;",
+      strong("Diastolic Blood Pressure"),
+      numericInput(
+        inputId = "diastm",
+        label = NULL,
+        value = 100,
+        min = 80,
+        max = 250,
+        step = 1,
+        width = 60
+      )),
+  
+  div(style = "display: inline-block;
+      vertical-align: top;
+      width: 200px;",
       strong("Levels of NT-proBNP"), 
            numericInput(
              inputId = "nt_pro_bnp",
