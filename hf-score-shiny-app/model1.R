@@ -5,6 +5,9 @@ fluidRow(
   
   # Title
   column(4,
+         
+    style = "background-color: #E8E8E8",     
+         
     div(style = "display: inline-block;
         vertical-align:top;
         text-align:center;
@@ -149,7 +152,13 @@ fluidRow(
   
   # Output area
   
-  column(4,
+  column(8,
+         
+         tabsetPanel(
+           tabPanel("Summary"),
+           tabPanel("what does this mean?")
+          ), ## close tabset panel
+         
     div(style = "display: inline-block;
           vertical-align:top;
           text-align:center;

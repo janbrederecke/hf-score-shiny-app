@@ -22,7 +22,7 @@ ui <- fluidPage(
                                      source("model1.R")$value)
                         ),
                         tabPanel("About",
-                                     source("the_score.R")$value)
+                                     source("about.R")$value)
                        
             ) # close navbarPage
         ), # close shinyUI
