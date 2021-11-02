@@ -1,10 +1,8 @@
-# This is a first approach to building a web-app that calculates HF probability
-# based on the HF score project - here we use RSF models for testing purposes
-
+# The Shiny web-app that calculates 5-year risk for incident HF based on the developed score
 library(shiny)
-library(ranger)
+library(survival)
 
-load(file = paste0(here::here(), "/hf-score-shiny-app/rsf_primary.RData"))
+load(file = paste0(here::here(), "/hf-score-shiny-app/cox_primary.RData"))
 
 # Define UI for application
 ui <- fluidPage(
@@ -28,7 +26,7 @@ ui <- fluidPage(
         ), # close shinyUI
 ) # close fluidPage
 
-# Define server logic required to predict from the rsf model
+# Define server logic required to predict from the Cox model
 server <- function(input, output, session) {
     
     new_data <- eventReactive(input$enter, {
@@ -49,9 +47,13 @@ server <- function(input, output, session) {
 
     output$prediction <- renderText({
         data <- new_data()
+        
+        
+        ########### Change to Cox model!!!!#########
         pred <- predict(rsf_model, data)
         pred_matrix <- pred[["survival"]]
         v <- which(pred[["unique.death.times"]] >= (365.25*5))
+        
         paste0("Your estimated risk for HF within 5 years is: ",
         round((1 - pred_matrix[v[1]]) * 100, 2), "%."
         )
