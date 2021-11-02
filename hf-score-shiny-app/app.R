@@ -56,10 +56,14 @@ server <- function(input, output, session) {
         
 
         
+Wb_EventProb(fit = pred_model_primary,
+             timepoint = 5, 
+             param = c(-4.808491, -705.2948),
+             newdata = data,
+             newdata_timestart = data$age1, 
+             control = list(fnscale = -1, parscale = c(0.1, 0.1), maxit = 2000)
+            )
 
-        # PROBLEM: PREDICTION USING Wb_Event_Prob() and other functions 
-        # that use Age as the time scale and can be limited to 5 years all
-        # ask for the training data... FOE?
  
 
             
