@@ -41,7 +41,7 @@ server <- function(input, output, session) {
             drug_hypert   = input$drug_hypert,
             basediab1     = input$basediab1,
             basemi2       = input$basemi2,
-            alcave_ln        = log(input$alcave),
+            alcave_ln     = log(input$alcave),
             systm         = input$systm,
             diastm        = input$diastm,
             age1          = input$age1,
@@ -56,7 +56,7 @@ server <- function(input, output, session) {
         
 
         
-Wb_EventProb(fit = pred_model_primary,
+event_prob_5 <- Wb_EventProb(fit = pred_model_primary,
              timepoint = 5, 
              param = c(-4.808491, -705.2948),
              newdata = data,
