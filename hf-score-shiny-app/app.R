@@ -6,8 +6,8 @@ library(pmisc)
 # Load Cox-models for prediction
 load(file = c(paste0(here::here(),
                      "/hf-score-shiny-app/pred_model_primary.RData")))
-load(file = c(paste0(here::here(),
-                     "/hf-score-shiny-app/pred_model_secondary.RData")))
+# load(file = c(paste0(here::here(),
+#                      "/hf-score-shiny-app/pred_model_secondary.RData")))
 
 # Define UI for application
 ui <- fluidPage(
@@ -54,27 +54,25 @@ server <- function(input, output, session) {
     output$prediction <- renderText({
         data <- new_data()
         
-
-        
-event_prob_5 <- Wb_EventProb(fit = pred_model_primary,
-             timepoint = 5, 
-             param = c(-4.808491, -705.2948),
-             newdata = data,
-             newdata_timestart = data$age1, 
-             control = list(fnscale = -1, parscale = c(0.1, 0.1), maxit = 2000)
+        event_prob_5 <- Wb_EventProb(
+            fit = pred_model_primary,
+            timepoint = 5,
+            newdata = data,
+            newdata_timestart = "age1",
+            control = list(
+                fnscale = -1,
+                parscale = c(0.1, 0.1),
+                maxit = 2000
+            ),
+            param = cbind(
+                rep(pred_parameters_primary[, 1], length(pred_model_primary$y)),
+                rep(pred_parameters_primary[, 2], length(pred_model_primary$y))
             )
-
- 
-
-            
-        
-        
-        
-        
+        )
         
         paste0("Your estimated risk for HF within 5 years is: ",
-        round((event_prob_5) * 100, 2), "%."
-        )
+               round((event_prob_5) * 100, 2),
+               "%.")
     })
     
 } # close server function 
