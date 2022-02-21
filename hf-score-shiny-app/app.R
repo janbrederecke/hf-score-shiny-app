@@ -37,23 +37,25 @@ server <- function(input, output, session) {
     new_data <- eventReactive(input$enter, {
         data.frame(
             bmi           = input$bmi,
-            dsmoker       = input$dsmoker,
-            drug_hypert   = input$drug_hypert,
-            basediab1     = input$basediab1,
-            basemi2       = input$basemi2,
-            alcave_ln     = log(input$alcave),
+            dsmoker       = as.numeric(input$dsmoker),
+            drug_hypert   = as.numeric(input$drug_hypert),
+            basediab1     = as.numeric(input$basediab1),
+            basemi2       = as.numeric(input$basemi2),
+            alcave_ln     = log(input$alcave + 1),
             systm         = input$systm,
             diastm        = input$diastm,
             age1          = input$age1,
-            male          = input$male,
+            hfage1        = input$age1 + 5,
+            male          = paste0("male=", input$male),
             nt_pro_bnp_ln = log(input$nt_pro_bnp),
+            hf1_bin       = 0,
         stringsAsFactors = FALSE
         )
     })
 
     output$prediction <- renderText({
-        data <- new_data()
-        
+        data <- as.data.frame(new_data())
+        #paste(data)
         event_prob_5 <- Wb_EventProb(
             fit = pred_model_primary,
             timepoint = 5,
@@ -69,7 +71,7 @@ server <- function(input, output, session) {
                 rep(pred_parameters_primary[, 2], length(pred_model_primary$y))
             )
         )
-        
+
         paste0("Your estimated risk for HF within 5 years is: ",
                round((event_prob_5) * 100, 2),
                "%.")

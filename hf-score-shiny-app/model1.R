@@ -37,7 +37,7 @@ fluidRow(
            selectInput(
              inputId = "male",
              label = NULL,
-             choices = c(0, 1),
+             choices = c(0, 1), 
              selected = 0,
              width = 60
            )),
@@ -175,9 +175,9 @@ fluidRow(
          
     div(style = "display: inline-block;
           vertical-align:top;
-          text-align:center;
+          text-align:left;
           width: 100%;",
-          strong("Your calculated risk:")
+          strong("Your risk for developing heart failure:")
          ),
     
   textOutput("prediction")
