@@ -6,8 +6,8 @@ library(pmisc)
 # Load Cox-models for prediction
 load(file = c(paste0(here::here(),
                      "/hf-score-shiny-app/pred_model_primary.RData")))
-# load(file = c(paste0(here::here(),
-#                      "/hf-score-shiny-app/pred_model_secondary.RData")))
+source(paste0(here::here(),
+              "/hf-score-shiny-app/Wb_EventProb_nodata.R"))
 
 # Define UI for application
 ui <- fluidPage(
@@ -45,31 +45,22 @@ server <- function(input, output, session) {
             systm         = input$systm,
             diastm        = input$diastm,
             age1          = input$age1,
-            hfage1        = input$age1 + 5,
-            male          = paste0("male=", input$male),
+            #hfage1        = input$age1 + 5,
+            male          = input$male,
             nt_pro_bnp_ln = log(input$nt_pro_bnp),
-            hf1_bin       = 0,
+            #hf1_bin       = 0,
         stringsAsFactors = FALSE
         )
     })
 
     output$prediction <- renderText({
         data <- as.data.frame(new_data())
-        #paste(data)
-        event_prob_5 <- Wb_EventProb(
-            fit = pred_model_primary,
+       
+        event_prob_5 <- Wb_EventProb_nodata(
+            wb_info_primary,
             timepoint = 5,
             newdata = data,
-            newdata_timestart = "age1",
-            control = list(
-                fnscale = -1,
-                parscale = c(0.1, 0.1),
-                maxit = 2000
-            ),
-            param = cbind(
-                rep(pred_parameters_primary[, 1], length(pred_model_primary$y)),
-                rep(pred_parameters_primary[, 2], length(pred_model_primary$y))
-            )
+            newdata_timestart = "age1"
         )
 
         paste0("Your estimated risk for HF within 5 years is: ",

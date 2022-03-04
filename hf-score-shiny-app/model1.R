@@ -166,7 +166,7 @@ fluidRow(
   
   # Output area
   
-  column(8,
+  column(4,
          
          tabsetPanel(
            tabPanel("Summary"),
