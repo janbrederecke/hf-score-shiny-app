@@ -1,11 +1,17 @@
-# The Shiny web-app that calculates 5-year risk for incident HF based on the developed score
+# This shiny-app calculates the predicted 5-year risk for heart failure
+# Developer: Jan Brederecke, https://www.linkedin.com/in/janbrederecke
+# The app is based on the research published in ...
+
+# Load packages
 library(shiny)
 library(survival)
 library(pmisc)
 
-# Load Cox-models for prediction
+# Load cox-model for prediction
 load(file = c(paste0(here::here(),
                      "/hf-score-shiny-app/pred_model_primary.RData")))
+
+# Load custom prediction-function to predict using Weibull-baseline-hazard
 source(paste0(here::here(),
               "/hf-score-shiny-app/Wb_EventProb_nodata.R"))
 
@@ -22,19 +28,28 @@ ui <- fluidPage(
                         
                        navbarMenu("Choose Model",
                             tabPanel("Biomarker Score",
-                                     source("model1.R")$value)
+                                     source("model1.R")$value
+                            )
                         ),
-                        tabPanel("About",
-                                     source("about.R")$value)
                        
-            ) # close navbarPage
-        ), # close shinyUI
-) # close fluidPage
+                        tabPanel("About",
+                                 source("about.R")$value
+                        ),
+                       
+                       tabPanel("Cite us",
+                                source("cite_us.R")$value)
+                       
+            ) # Close navbarPage
+        ), # Close shinyUI
+) # Close fluidPage
 
 # Define server logic required to predict from the Cox-model
 server <- function(input, output, session) {
     
+    # Define reactive input
     new_data <- eventReactive(input$enter, {
+        
+        # Generate input
         data.frame(
             bmi           = input$bmi,
             dsmoker       = as.numeric(input$dsmoker),
@@ -45,17 +60,19 @@ server <- function(input, output, session) {
             systm         = input$systm,
             diastm        = input$diastm,
             age1          = input$age1,
-            #hfage1        = input$age1 + 5,
             male          = input$male,
             nt_pro_bnp_ln = log(input$nt_pro_bnp),
-            #hf1_bin       = 0,
         stringsAsFactors = FALSE
         )
-    })
-
+    }) # Close eventReactive
+    
+    # Define text-ouput including predicted event-probability
     output$prediction <- renderText({
+        
+        # Turn the reactive input into a usable dataframe
         data <- as.data.frame(new_data())
        
+        # Predict event-probability
         event_prob_5 <- Wb_EventProb_nodata(
             wb_info_primary,
             timepoint = 5,
@@ -66,9 +83,9 @@ server <- function(input, output, session) {
         paste0("Your estimated risk for HF within 5 years is: ",
                round((event_prob_5) * 100, 2),
                "%.")
-    })
+    }) # Close renderText
     
-} # close server function 
+} # Close server function 
 
 # Run the application 
 shinyApp(ui = ui, server = server)

@@ -1,9 +1,13 @@
-# Inputs for the predictor variables
+# This page contains the inputs of the primary model used for the prediction of
+# the heart-failure-score
+
+# Here go all the inputs for the predictor variables
 fluidRow(
   
-  # Input area
+  # This is the input area
   
   # Title
+  # This is the column to the left (4 units wide)
   column(4,
          
     style = "background-color: #E8E8E8",     
@@ -27,7 +31,7 @@ fluidRow(
              min = 50,
              max = 100,
              step = 1,
-             width = 60
+             width = 80
            )),
   
   div(style = "display: inline-block;
@@ -39,7 +43,7 @@ fluidRow(
              label = NULL,
              choices = c(0, 1), 
              selected = 0,
-             width = 60
+             width = 80
            )),
            
   div(style = "display: inline-block;
@@ -53,7 +57,7 @@ fluidRow(
              min = 15,
              max = 60,
              step = 0.1,
-             width = 60
+             width = 80
            )),
            
   div(style = "display: inline-block;
@@ -65,7 +69,7 @@ fluidRow(
              label = NULL,
              choices = c(0, 1),
              selected = 0,
-             width = 60
+             width = 80
            )),
   
   div(style = "display: inline-block;
@@ -77,7 +81,7 @@ fluidRow(
              label = NULL,
              choices = c(0, 1),
              selected = 0,
-             width = 60
+             width = 80
            )),
   
   div(style = "display: inline-block;
@@ -89,7 +93,7 @@ fluidRow(
              label = NULL,
              choices = c(0, 1),
              selected = 0,
-             width = 60
+             width = 80
            )),
 
   div(style = "display: inline-block;
@@ -101,7 +105,7 @@ fluidRow(
              label = NULL,
              choices = c(0, 1),
              selected = 0,
-             width = 60
+             width = 80
            )),
            
   div(style = "display: inline-block;
@@ -115,7 +119,7 @@ fluidRow(
              min = 0,
              max = 40,
              step = 1,
-             width = 60
+             width = 80
            )),
   
   div(style = "display: inline-block;
@@ -129,7 +133,7 @@ fluidRow(
              min = 50,
              max = 250,
              step = 1,
-             width = 60
+             width = 80
            )),
   
   div(style = "display: inline-block;
@@ -143,7 +147,7 @@ fluidRow(
         min = 80,
         max = 250,
         step = 1,
-        width = 60
+        width = 80
       )),
   
   div(style = "display: inline-block;
@@ -157,21 +161,23 @@ fluidRow(
              min = 0,
              max = 100,
              step = 0.1,
-             width = 60
+             width = 80
            )),
   
+  # This introduces the actionButton used to run the calculation
   actionButton("enter", label = "Calculate Risk")
   
-  ), # close column
+  ), # Close column
   
   # Output area
-  
+  # This is the column to the right (4 units wide)
   column(4,
          
+         # tabsetPanel introduced 
          tabsetPanel(
            tabPanel("Summary"),
            tabPanel("what does this mean?")
-          ), ## close tabset panel
+          ), ## close tabsetPanel
          
     div(style = "display: inline-block;
           vertical-align:top;
@@ -182,7 +188,5 @@ fluidRow(
     
   textOutput("prediction")
   
-  ) # close column
-  
-  
-) # close fluidRow
+  ) # Close column
+) # Close fluidRow

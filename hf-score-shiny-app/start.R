@@ -1,8 +1,7 @@
 fluidRow(
 
 # Start text
-  p("The Project
-  Biomarkers are considered as tools to enhance cardiovascular risk estimation.
+  p("Biomarkers are considered as tools to enhance cardiovascular risk estimation.
   However, the value of biomarkers on risk estimation beyond established risk scores,
   their comparative impact among different European regions and their role in the drive
   towards individualized medicine remains uncertain. Within BiomarCaRE we use our unique
@@ -18,4 +17,4 @@ fluidRow(
   targeting of novel biomarkers, and the evaluation of the impact of a multiple
   biomarker score in large prospective population cohorts across different European regions."
   )
-)
+) # Close fluidRow
