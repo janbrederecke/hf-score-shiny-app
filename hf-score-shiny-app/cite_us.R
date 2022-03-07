@@ -3,8 +3,9 @@ fluidRow(
   
   # Info text
   column(12,
-         HTML("You can cite the original publication that this app is based on
-              using ..."
+         HTML("The models used to predict the risk of delevoping heart failure
+              within the next five years are were published in : 
+              "
          )
   )# Close column
   

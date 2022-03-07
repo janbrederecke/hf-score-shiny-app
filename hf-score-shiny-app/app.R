@@ -28,7 +28,10 @@ ui <- fluidPage(
                         
                        navbarMenu("Choose Model",
                             tabPanel("Biomarker Score",
-                                     source("model1.R")$value
+                                     source("bm_score.R")$value
+                            ),
+                            tabPanel("Extended Biomarker Score",
+                                      source("ext_bm_score.R")$value
                             )
                         ),
                        
