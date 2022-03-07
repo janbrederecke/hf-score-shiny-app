@@ -175,18 +175,9 @@ fluidRow(
          
          # tabsetPanel introduced 
          tabsetPanel(
-           tabPanel("Summary"),
-           tabPanel("what does this mean?")
-          ), ## close tabsetPanel
-         
-    div(style = "display: inline-block;
-          vertical-align:top;
-          text-align:left;
-          width: 100%;",
-          strong("Your risk for developing heart failure:")
-         ),
-    
-  textOutput("prediction")
-  
+           tabPanel("Summary",
+                    textOutput("prediction")),
+           tabPanel("What does this mean?")
+          ) ## Close tabsetPanel
   ) # Close column
 ) # Close fluidRow

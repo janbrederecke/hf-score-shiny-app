@@ -25,7 +25,7 @@ ui <- fluidPage(
         
         # Define navigation bar
         shinyUI(
-            navbarPage("European Heart Failure Score",
+            navbarPage("The European Heart Failure Score",
                        
                        tabPanel("Start" ,
                                 source("start.R")$value
@@ -40,18 +40,19 @@ ui <- fluidPage(
                              )
                         ),
                        
-                        tabPanel("About",
-                                 source("about.R")$value
+                        tabPanel("Cite us",
+                                source("cite_us.R")$value
+                        
                         ),
                        
-                       tabPanel("Cite us",
-                                source("cite_us.R")$value)
-                       
+                        tabPanel("About",
+                                 source("about.R")$value)
+                        
             ) # Close navbarPage
         ), # Close shinyUI
 ) # Close fluidPage
 
-# Define server logic required to predict from the Cox-model
+# Define server logic required to predict from the Cox-models
 server <- function(input, output, session) {
 
 ### Biomarker Score
@@ -89,9 +90,8 @@ server <- function(input, output, session) {
             newdata_timestart = "age1"
         )
 
-        paste0("Your estimated risk for HF within 5 years is: ",
-               round((event_prob_5_bm) * 100, 2),
-               "%.")
+        paste0(round((event_prob_5_bm) * 100, 2),
+               "%")
     }) # Close renderText
 
 ### Extended Biomarker Score
@@ -131,9 +131,8 @@ server <- function(input, output, session) {
             newdata_timestart = "age1"
         )
         
-        paste0("Your estimated risk for HF within 5 years is: ",
-               round((event_prob_5_bm_ext) * 100, 2),
-               "%.")
+        paste0(round((event_prob_5_bm_ext) * 100, 2),
+               "%")
     }) # Close renderText
     
 } # Close server function 

@@ -21,7 +21,11 @@ fluidRow(
   
   # Picture on startpage
   column(8,
-  
+         img(src   = 'test.png',
+             align = "center",
+             height = "50%",
+             width = "50%", 
+             style = "display: block; margin-left: auto; margin-right: auto;")
   ) # Close column
 
 ) # Close fluidRow
