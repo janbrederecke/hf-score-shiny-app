@@ -25,7 +25,7 @@ fluidRow(
       width: 200px;",
       strong("Age in years"), 
       numericInput(
-        inputId = "age1",
+        inputId = "age1_ext",
         label = NULL,
         value = 50,
         min = 50,
@@ -39,7 +39,7 @@ fluidRow(
       width: 200px;",
       strong("Sex"),         
       selectInput(
-        inputId = "male",
+        inputId = "male_ext",
         label = NULL,
         choices = c(0, 1), 
         selected = 0,
@@ -51,7 +51,7 @@ fluidRow(
       width: 200px;",
       strong("Body Mass Index"), 
       numericInput(
-        inputId = "bmi",
+        inputId = "bmi_ext",
         label = NULL,
         value = 25,
         min = 15,
@@ -65,7 +65,7 @@ fluidRow(
       width: 200px;",
       strong("Diabetes"),
       selectInput(
-        inputId = "basediab1",
+        inputId = "basediab1_ext",
         label = NULL,
         choices = c(0, 1),
         selected = 0,
@@ -77,7 +77,7 @@ fluidRow(
       width: 200px;",
       strong("Hypertension Medication"),
       selectInput(
-        inputId = "drug_hypert",
+        inputId = "drug_hypert_ext",
         label = NULL,
         choices = c(0, 1),
         selected = 0,
@@ -89,7 +89,7 @@ fluidRow(
       width: 200px;",
       strong("Daily Smoker"),
       selectInput(
-        inputId = "dsmoker",
+        inputId = "dsmoker_ext",
         label = NULL,
         choices = c(0, 1),
         selected = 0,
@@ -101,7 +101,7 @@ fluidRow(
       width: 200px;",
       strong("Myocardial Infarctiont"),
       selectInput(
-        inputId = "basemi2",
+        inputId = "basemi2_ext",
         label = NULL,
         choices = c(0, 1),
         selected = 0,
@@ -113,7 +113,7 @@ fluidRow(
       width: 200px;",
       strong("Alcohol consumption"),
       numericInput(
-        inputId = "alcave",
+        inputId = "alcave_ext",
         label = NULL,
         value = 0,
         min = 0,
@@ -127,7 +127,7 @@ fluidRow(
       width: 200px;",
       strong("Systolic Blood Pressure"),
       numericInput(
-        inputId = "systm",
+        inputId = "systm_ext",
         label = NULL,
         value = 80,
         min = 50,
@@ -141,7 +141,7 @@ fluidRow(
       width: 200px;",
       strong("Diastolic Blood Pressure"),
       numericInput(
-        inputId = "diastm",
+        inputId = "diastm_ext",
         label = NULL,
         value = 100,
         min = 80,
@@ -155,7 +155,35 @@ fluidRow(
       width: 200px;",
       strong("Levels of NT-proBNP"), 
       numericInput(
-        inputId = "nt_pro_bnp",
+        inputId = "nt_pro_bnp_ext",
+        label = NULL,
+        value = 25,
+        min = 0,
+        max = 100,
+        step = 0.1,
+        width = 80
+      )),
+      
+      div(style = "display: inline-block;
+      vertical-align: top;
+      width: 200px;",
+      strong("Levels of Chola"), 
+      numericInput(
+        inputId = "chola_ext",
+        label = NULL,
+        value = 25,
+        min = 0,
+        max = 100,
+        step = 0.1,
+        width = 80
+      )),
+      
+      div(style = "display: inline-block;
+      vertical-align: top;
+      width: 200px;",
+      strong("Levels of EGFR"), 
+      numericInput(
+        inputId = "egfr_ckdepi_crea_ext",
         label = NULL,
         value = 25,
         min = 0,
@@ -165,7 +193,7 @@ fluidRow(
       )),
       
       # This introduces the actionButton used to run the calculation
-      actionButton("enter", label = "Calculate Risk")
+      actionButton("enter_ext", label = "Calculate Risk")
       
   ), # Close column
   
@@ -186,7 +214,7 @@ fluidRow(
           strong("Your risk for developing heart failure:")
          ),
          
-         textOutput("prediction")
+         textOutput("prediction_ext")
          
   ) # Close column
 ) # Close fluidRow

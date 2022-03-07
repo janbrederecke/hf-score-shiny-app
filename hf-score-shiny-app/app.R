@@ -7,9 +7,14 @@ library(shiny)
 library(survival)
 library(pmisc)
 
-# Load cox-model for prediction
+# Load cox-models for prediction
+## Biomarker Score
 load(file = c(paste0(here::here(),
                      "/hf-score-shiny-app/pred_model_primary.RData")))
+
+## Extended Biomarker Score
+load(file = c(paste0(here::here(),
+                     "/hf-score-shiny-app/pred_model_secondary.RData")))
 
 # Load custom prediction-function to predict using Weibull-baseline-hazard
 source(paste0(here::here(),
@@ -30,9 +35,9 @@ ui <- fluidPage(
                             tabPanel("Biomarker Score",
                                      source("bm_score.R")$value
                             ),
-                            tabPanel("Extended Biomarker Score",
-                                      source("ext_bm_score.R")$value
-                            )
+                             tabPanel("Extended Biomarker Score",
+                                       source("bm_score_ext.R")$value
+                             )
                         ),
                        
                         tabPanel("About",
@@ -48,9 +53,10 @@ ui <- fluidPage(
 
 # Define server logic required to predict from the Cox-model
 server <- function(input, output, session) {
-    
-    # Define reactive input
-    new_data <- eventReactive(input$enter, {
+
+### Biomarker Score
+    # Define reactive input 
+    new_data_bm <- eventReactive(input$enter, {
         
         # Generate input
         data.frame(
@@ -73,18 +79,60 @@ server <- function(input, output, session) {
     output$prediction <- renderText({
         
         # Turn the reactive input into a usable dataframe
-        data <- as.data.frame(new_data())
+        data_bm <- as.data.frame(new_data_bm())
        
         # Predict event-probability
-        event_prob_5 <- Wb_EventProb_nodata(
+        event_prob_5_bm <- Wb_EventProb_nodata(
             wb_info_primary,
             timepoint = 5,
-            newdata = data,
+            newdata = data_bm,
             newdata_timestart = "age1"
         )
 
         paste0("Your estimated risk for HF within 5 years is: ",
-               round((event_prob_5) * 100, 2),
+               round((event_prob_5_bm) * 100, 2),
+               "%.")
+    }) # Close renderText
+
+### Extended Biomarker Score
+    # Define reactive input 
+    new_data_bm_ext <- eventReactive(input$enter_ext, {
+        
+        # Generate input
+        data.frame(
+            bmi              = input$bmi_ext,
+            dsmoker          = as.numeric(input$dsmoker_ext),
+            drug_hypert      = as.numeric(input$drug_hypert_ext),
+            basediab1        = as.numeric(input$basediab1_ext),
+            basemi2          = as.numeric(input$basemi2_ext),
+            alcave_ln        = log(input$alcave_ext + 1),
+            systm            = input$systm_ext,
+            diastm           = input$diastm_ext,
+            age1             = input$age1_ext,
+            male             = input$male_ext,
+            nt_pro_bnp_ln    = log(input$nt_pro_bnp_ext),
+            chola            = input$chola_ext,
+            egfr_ckdepi_crea = input$egfr_ckdepi_crea_ext,
+            stringsAsFactors = FALSE
+        )
+    }) # Close eventReactive
+    
+    # Define text-ouput including predicted event-probability
+    output$prediction_ext <- renderText({
+        
+        # Turn the reactive input into a usable dataframe
+        data_bm_ext <- as.data.frame(new_data_bm_ext())
+        
+        # Predict event-probability
+        event_prob_5_bm_ext <- Wb_EventProb_nodata(
+            wb_info_secondary,
+            timepoint = 5,
+            newdata = data_bm_ext,
+            newdata_timestart = "age1"
+        )
+        
+        paste0("Your estimated risk for HF within 5 years is: ",
+               round((event_prob_5_bm_ext) * 100, 2),
                "%.")
     }) # Close renderText
     
