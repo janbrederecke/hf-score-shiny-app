@@ -175,9 +175,9 @@ fluidRow(
          
          # tabsetPanel introduced 
          tabsetPanel(
-           tabPanel("Summary",
+           tabPanel("SUMMARY",
                     textOutput("prediction")),
-           tabPanel("What does this mean?")
+           tabPanel("EXPLANATION OF THE RESULTS")
           ) ## Close tabsetPanel
   ) # Close column
 ) # Close fluidRow

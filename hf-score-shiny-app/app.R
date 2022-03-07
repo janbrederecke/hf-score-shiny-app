@@ -25,29 +25,27 @@ ui <- fluidPage(
         
         # Define navigation bar
         shinyUI(
-            navbarPage("The European Heart Failure Score",
+            navbarPage("THE EUROPEAN HEART FAILURE SCORE RISK CALCULATOR",
                        
-                       tabPanel("Start" ,
-                                source("start.R")$value
+                        tabPanel("START" ,
+                                 source("start.R")$value
                         ),
                         
-                       navbarMenu("Choose Model",
-                            tabPanel("Biomarker Score",
+                        navbarMenu("CHOOSE MODEL",
+                            tabPanel("BIOMARKER SCORE",
                                      source("bm_score.R")$value
                             ),
-                             tabPanel("Extended Biomarker Score",
+                            tabPanel("EXTENDED BIOMARKER SCORE",
                                        source("bm_score_ext.R")$value
-                             )
+                            )
                         ),
                        
-                        tabPanel("Cite us",
+                        tabPanel("CITE US",
                                 source("cite_us.R")$value
-                        
                         ),
                        
-                        tabPanel("About",
+                        tabPanel("ABOUT",
                                  source("about.R")$value)
-                        
             ) # Close navbarPage
         ), # Close shinyUI
 ) # Close fluidPage
