@@ -2,15 +2,15 @@
 fluidRow(
   
   # Picture on the side
-  column(8,
-    img(src   = 'cite_us.jpeg',
-        style = "width: 100%;
-                 padding: 0;"
-    )
-  ),
+  # column(8,
+  #   img(src   = 'cite_us.jpeg',
+  #       style = "width: 100%;
+  #                padding: 0;"
+  #   )
+  # ),
   
   # Cite article
-  column(4,
+  column(7,
     HTML("<b>HOW TO CITE THE ORIGINAL ARTICLE USED TO DERIVE THE APP</b>
          <br>"
     ),

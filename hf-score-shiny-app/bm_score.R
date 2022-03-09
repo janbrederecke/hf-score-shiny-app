@@ -9,7 +9,7 @@ fluidRow(
   # Title
   # This is the column to the left (4 units wide)
   column(4,
-    style = "background-color: #E8E8E8",
+   # style = "background-color: #E8E8E8",
     
     # Design of column          
     div(
@@ -192,7 +192,7 @@ fluidRow(
   ), # Close column
   
   # Output area
-  # This is the column to the right (4 units wide)
+  # This is the column to the right (3 units wide)
   column(4,
     # tabsetPanel introduced 
     tabsetPanel(

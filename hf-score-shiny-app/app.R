@@ -5,6 +5,7 @@
 # Load packages
 library(shiny)
 library(shinythemes)
+library(shinyWidgets)
 library(survival)
 library(pmisc)
 
@@ -23,6 +24,7 @@ source(paste0(here::here(),
 
 # Define UI for application
 ui <- fluidPage(theme = shinytheme("cosmo"),
+                setBackgroundImage("background.jpg"),
         
     # Define navigation bar
     shinyUI(

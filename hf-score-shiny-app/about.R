@@ -2,7 +2,7 @@
 fluidRow(
   
   # Project information
-  column(4,
+  column(7,
     HTML("<b>WHAT IS THE APP GOOD FOR?</b>
          <br>
          The European Heart Failure Score app was designed to enable individual
@@ -41,14 +41,16 @@ fluidRow(
          or feel free to connect via 
          <a href=\"https://www.linkedin.com/in/janbrederecke\">LinkedIn</a>.
          <br>"
-    )
-  ), # Close column
-  
-  # Developer information
-  column(8,
-    img(src   = 'about.png',
-        style = "width: 100%;
-                padding: 0;")
+    ),
+    br(),
+    HTML("<b>WHO MADE THE BACKGROUND IMAGE?</b>
+         <br>
+         The background image was designed by photographer, web designer, and
+         biology graduate 
+         <a href=\"https://www.brederecke.com\">Tim Brederecke</a>
+         <br>"
+    ),
+    
   ), # Close column
 ) # Close fluidRow          
 

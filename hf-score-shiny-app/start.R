@@ -1,6 +1,6 @@
 fluidRow(
   # Start text
-  column(4,
+  column(7,
     HTML("<b> CALCULATE YOUR INDIVIUAL RISK FOR HEART FAILURE!</b>
     <br>
     Biomarkers are considered as tools to enhance cardiovascular risk estimation.
@@ -22,10 +22,10 @@ fluidRow(
   ), # Close column
   
   # Picture on startpage
-  column(8,
-    img(src    = 'test.png',
-        style  = "width: 100%;
-                 padding: 0;"
-    )
+  column(4,
+    # img(src    = 'heart.jpg',
+    #     style  = "width: 100%;
+    #              padding: 0;"
+    # )
   ) # Close column
 ) # Close fluidRow
