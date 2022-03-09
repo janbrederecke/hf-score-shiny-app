@@ -23,13 +23,9 @@ fluidRow(
   
   # Picture on startpage
   column(8,
-         img(src    = 'test.png',
-             align  = "right",
-             style  = "height: 80vh;
-                       max-height: 600px;
-                       display: block;
-                       margin-left: auto;
-                       margin-right: auto;"
-             )
+    img(src    = 'test.png',
+        style  = "width: 100%;
+                 padding: 0;"
+    )
   ) # Close column
 ) # Close fluidRow

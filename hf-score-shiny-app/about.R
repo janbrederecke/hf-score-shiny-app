@@ -6,13 +6,10 @@ fluidRow(
     HTML("<b>WHAT IS THE APP GOOD FOR?</b>
          <br>
          The European Heart Failure Score app was designed to enable individual
-         risk prediction for five year risk of heart failure incidence. 
+         prediction for five year risk of heart failure incidence. 
          <br>
          This app is not designed for diagnostic use and results are
          probabilistic in nature.
-         <br>
-         For more information on the BiomarCaRE consortium see
-         <a href=\"http://www.biomarcare.eu\">biomarcare.eu</a>.
          <br>"
     ),
     br(),
@@ -49,13 +46,9 @@ fluidRow(
   
   # Developer information
   column(8,
-         img(src   = 'about.png',
-             align = "right",
-             style = "height: 80vh;
-                      max-height: 600px;
-                      display: block;
-                      margin-left: auto;
-                      margin-right: auto;")
+    img(src   = 'about.png',
+        style = "width: 100%;
+                padding: 0;")
   ), # Close column
 ) # Close fluidRow          
 

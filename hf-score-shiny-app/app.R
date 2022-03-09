@@ -1,13 +1,14 @@
 # This shiny-app calculates the predicted 5-year risk for heart failure
-# Developer: Jan Brederecke, https://www.linkedin.com/in/janbrederecke
+# Developer: Jan Brederecke
 # The app is based on the research published in ...
 
 # Load packages
 library(shiny)
+library(shinythemes)
 library(survival)
 library(pmisc)
 
-# Load cox-models for prediction
+# Load Cox-models for prediction
 ## Biomarker Score
 load(file = c(paste0(here::here(),
                      "/hf-score-shiny-app/pred_model_primary.RData")))
@@ -21,33 +22,35 @@ source(paste0(here::here(),
               "/hf-score-shiny-app/Wb_EventProb_nodata.R"))
 
 # Define UI for application
-ui <- fluidPage(
+ui <- fluidPage(theme = shinytheme("cosmo"),
         
-        # Define navigation bar
-        shinyUI(
-            navbarPage("THE EUROPEAN HEART FAILURE SCORE RISK CALCULATOR",
+    # Define navigation bar
+    shinyUI(
+        navbarPage("THE EUROPEAN HEART FAILURE SCORE RISK CALCULATOR",
                        
-                        tabPanel("START" ,
-                                 source("start.R")$value
-                        ),
+            tabPanel("START" ,
+                     source("start.R")$value
+            ),
                         
-                        navbarMenu("CHOOSE MODEL",
-                            tabPanel("BIOMARKER SCORE",
-                                     source("bm_score.R")$value
-                            ),
-                            tabPanel("EXTENDED BIOMARKER SCORE",
-                                       source("bm_score_ext.R")$value
-                            )
-                        ),
+            navbarMenu("CHOOSE MODEL",
+                    
+                tabPanel("BIOMARKER SCORE",
+                         source("bm_score.R")$value
+                ),
+                tabPanel("EXTENDED BIOMARKER SCORE",
+                         source("bm_score_ext.R")$value
+                )
+            ),
+            
+            tabPanel("CITE US",
+                     source("cite_us.R")$value
+            ),
                        
-                        tabPanel("CITE US",
-                                source("cite_us.R")$value
-                        ),
-                       
-                        tabPanel("ABOUT",
-                                 source("about.R")$value)
-            ) # Close navbarPage
-        ), # Close shinyUI
+            tabPanel("ABOUT",
+                     source("about.R")$value
+            )
+        ) # Close navbarPage
+    ), # Close shinyUI
 ) # Close fluidPage
 
 # Define server logic required to predict from the Cox-models
@@ -59,18 +62,18 @@ server <- function(input, output, session) {
         
         # Generate input
         data.frame(
-            bmi           = input$bmi,
-            dsmoker       = as.numeric(input$dsmoker),
-            drug_hypert   = as.numeric(input$drug_hypert),
-            basediab1     = as.numeric(input$basediab1),
-            basemi2       = as.numeric(input$basemi2),
-            alcave_ln     = log(input$alcave + 1),
-            systm         = input$systm,
-            diastm        = input$diastm,
-            age1          = input$age1,
-            male          = input$male,
-            nt_pro_bnp_ln = log(input$nt_pro_bnp),
-        stringsAsFactors = FALSE
+            bmi              = input$bmi,
+            dsmoker          = as.numeric(input$dsmoker),
+            drug_hypert      = as.numeric(input$drug_hypert),
+            basediab1        = as.numeric(input$basediab1),
+            basemi2          = as.numeric(input$basemi2),
+            alcave_ln        = log(input$alcave + 1),
+            systm            = input$systm,
+            diastm           = input$diastm,
+            age1             = input$age1,
+            male             = input$male,
+            nt_pro_bnp_ln    = log(input$nt_pro_bnp),
+            stringsAsFactors = FALSE
         )
     }) # Close eventReactive
     
@@ -83,13 +86,12 @@ server <- function(input, output, session) {
         # Predict event-probability
         event_prob_5_bm <- Wb_EventProb_nodata(
             wb_info_primary,
-            timepoint = 5,
-            newdata = data_bm,
+            timepoint         = 5,
+            newdata           = data_bm,
             newdata_timestart = "age1"
         )
 
-        paste0(round((event_prob_5_bm) * 100, 2),
-               "%")
+        paste0(round((event_prob_5_bm) * 100, 2), "%")
     }) # Close renderText
 
 ### Extended Biomarker Score
@@ -124,13 +126,12 @@ server <- function(input, output, session) {
         # Predict event-probability
         event_prob_5_bm_ext <- Wb_EventProb_nodata(
             wb_info_secondary,
-            timepoint = 5,
-            newdata = data_bm_ext,
+            timepoint         = 5,
+            newdata           = data_bm_ext,
             newdata_timestart = "age1"
         )
         
-        paste0(round((event_prob_5_bm_ext) * 100, 2),
-               "%")
+        paste0(round((event_prob_5_bm_ext) * 100, 2), "%")
     }) # Close renderText
     
 } # Close server function 

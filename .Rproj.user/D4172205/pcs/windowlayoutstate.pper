@@ -6,9 +6,9 @@
         "windowheight": 1000
     },
     "right": {
-        "splitterpos": 472,
+        "splitterpos": 124,
         "topwindowstate": "HIDE",
-        "panelheight": 1162,
-        "windowheight": 1200
+        "panelheight": 962,
+        "windowheight": 1000
     }
 }
