@@ -51,7 +51,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
             navbarMenu("CHOOSE MODEL",
                     
                 tabPanel("BIOMARKER SCORE",
-                         source("bm_score.R")$value
+                         source("test.R")$value
                 ),
                 tabPanel("EXTENDED BIOMARKER SCORE",
                          source("bm_score_ext.R")$value
