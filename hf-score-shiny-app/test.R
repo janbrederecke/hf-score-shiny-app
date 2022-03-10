@@ -7,14 +7,17 @@ fluidRow(
   # Move all the input labels to the left
   tags$head(
     tags$style(type = "text/css",
-               "label.control-label,
-               .selectize-control.single {display: table-cell;
-                                          text-align: left;
-                                          vertical-align: left;
-                                          width: 350px;
-               }
-               .form-group {display: table-row;
-               }"
+                "label.control-label,
+                .selectize-control.single {
+                  display: table-cell;
+                  text-align: left;
+                  vertical-align : middle;
+                  width: 340px;
+                }
+                .form-group {
+                  display: table-row;
+                }
+                "
     )
   ),
   
@@ -33,6 +36,8 @@ fluidRow(
       max     = 100,
       step    = 1
     ),
+
+    div(style = "margin-top: 5px"),
     
     selectInput(
       inputId  = "male",
@@ -49,7 +54,9 @@ fluidRow(
       max     = 60,
       step    = 0.1
     ),
-  
+
+    div(style = "margin-top: 5px"),
+    
     selectInput(
       inputId  = "basediab1",
       label    = "Do you have diabetes?",
@@ -87,6 +94,8 @@ fluidRow(
       step    = 1
     ),
   
+    div(style = "margin-top: 5px"),
+    
     numericInput(
       inputId = "systm",
       label   = "Systolic blood pressure",
@@ -95,6 +104,8 @@ fluidRow(
       max     = 250,
       step    = 1
     ),
+    
+    div(style = "margin-top: 5px"),
     
     numericInput(
       inputId = "diastm",
@@ -105,6 +116,8 @@ fluidRow(
       step = 1
     ),
     
+    div(style = "margin-top: 5px"),
+    
     numericInput(
       inputId = "nt_pro_bnp",
       label   = "Levels of NT-proBNP",
@@ -113,6 +126,8 @@ fluidRow(
       max     = 100,
       step    = 0.1
     ),
+    
+    div(style = "margin-top: 5px"),
     
     # This introduces the actionButton used to run the calculation
     actionButton("enter", label = "Calculate Risk")

@@ -31,10 +31,17 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                     tags$style(
                         HTML(
                             ".form-control {
-                            border-radius: 0px 0px 0px 0px;
+                                border-radius: 0px 0px 0px 0px;
+                                height: 40px;
+                                width: 80px;
+                                font-size: 12pt;
+                                
                             }
                             .selectize-input {
-                            border-radius: 0px 0px 0px 0px;
+                                border-radius: 0px 0px 0px 0px;
+                                height: 40px;
+                                width: 80px;
+                                font-size: 12pt;
                             }"
                         ) # Close HTML
                     ) # Close tags$style
