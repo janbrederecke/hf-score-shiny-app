@@ -25,6 +25,20 @@ source(paste0(here::here(),
 # Define UI for application
 ui <- fluidPage(theme = shinytheme("cosmo"),
                 setBackgroundImage("background.jpg"),
+                
+                # Global control of the corners of input fields (not round!)
+                tags$head(
+                    tags$style(
+                        HTML(
+                            ".form-control {
+                            border-radius: 0px 0px 0px 0px;
+                            }
+                            .selectize-input {
+                            border-radius: 0px 0px 0px 0px;
+                            }"
+                        ) # Close HTML
+                    ) # Close tags$style
+                ), # Close tags$head
         
     # Define navigation bar
     shinyUI(
