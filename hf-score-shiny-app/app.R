@@ -35,7 +35,6 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                                 height: 40px;
                                 width: 80px;
                                 font-size: 12pt;
-                                
                             }
                             .selectize-input {
                                 border-radius: 0px 0px 0px 0px;
@@ -58,7 +57,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
             navbarMenu("CHOOSE MODEL",
                     
                 tabPanel("BIOMARKER SCORE",
-                         source("test.R")$value
+                         source("bm_score.R")$value
                 ),
                 tabPanel("EXTENDED BIOMARKER SCORE",
                          source("bm_score_ext.R")$value

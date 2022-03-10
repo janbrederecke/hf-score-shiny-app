@@ -4,204 +4,145 @@
 # Here go all the inputs for the predictor variables
 fluidRow(
   
+  # Move all the input labels to the left
+  tags$head(
+    tags$style(type = "text/css",
+                "label.control-label,
+                .selectize-control.single {
+                  display: table-cell;
+                  text-align: left;
+                  vertical-align : middle;
+                  width: 340px;
+                }
+                .form-group {
+                  display: table-row;
+                }
+                "
+    )
+  ),
+  
   # This is the input area
   
   # Title
-  # This is the column to the left (4 units wide)
-  column(4,
-   # style = "background-color: #E8E8E8",
-    
-    # Design of column          
-    div(
-      style = "display: inline-block;
-               vertical-align: top;
-               text-align: left;
-               width: 100%;",
-      strong("ENTER YOUR INFORMATION BELOW: ")
-    ),
-
-  # Inputs
-  div(
-    style = "display: inline-block;
-             vertical-align: top;
-             width: 200px;",
-    strong("Age in years"), 
+  # This is the column to the left
+  column(3,
+  
+    # Inputs
     numericInput(
       inputId = "age1",
-      label   = NULL,
+      label   = "Your age in years",
       value   = 50,
       min     = 50,
       max     = 100,
-      step    = 1,
-      width   = 80
-    )
-  ),
-  
-  div(
-    style = "display: inline-block;
-            vertical-align: top;
-            width: 200px;",
-    strong("Sex"),         
+      step    = 1
+    ),
+
+    div(style = "margin-top: 6px"),
+    
     selectInput(
       inputId  = "male",
-      label    = NULL,
+      label    = "Your sex",
       choices  = c(0, 1), 
-      selected = 0,
-      width    = 80
-    )
-  ),
-           
-  div(
-    style = "display: inline-block;
-            vertical-align: top;
-            width: 200px;",
-    strong("Body Mass Index"), 
+      selected = 0
+    ),
+             
     numericInput(
       inputId = "bmi",
-      label   = NULL,
+      label   = "Your Body Mass Index (BMI)",
       value   = 25,
       min     = 15,
       max     = 60,
-      step    = 0.1,
-      width   = 80
-    )
-  ),
-           
-  div(
-    style = "display: inline-block;
-            vertical-align: top;
-            width: 200px;",
-    strong("Diabetes"),
+      step    = 0.1
+    ),
+
+    div(style = "margin-top: 6px"),
+    
     selectInput(
       inputId  = "basediab1",
-      label    = NULL,
+      label    = "Do you have diabetes?",
       choices  = c(0, 1),
-      selected = 0,
-      width    = 80
-    )
-  ),
-  
-  div(
-    style = "display: inline-block;
-            vertical-align: top;
-            width: 200px;",
-    strong("Hypertension Medication"),
+      selected = 0
+    ),
+    
     selectInput(
       inputId  = "drug_hypert",
-      label    = NULL,
+      label    = "Do you take ani-hypertension medication?",
       choices  = c(0, 1),
-      selected = 0,
-      width    = 80
-    )
-  ),
-  
-  div(
-    style = "display: inline-block;
-            vertical-align: top;
-            width: 200px;",
-    strong("Daily Smoker"),
+      selected = 0
+    ),
+    
     selectInput(
       inputId  = "dsmoker",
-      label    = NULL,
+      label    = "Do you smoke regularly?",
       choices  = c(0, 1),
-      selected = 0,
-      width    = 80
-    )
-  ),
-
-  div(
-    style = "display: inline-block;
-            vertical-align: top;
-            width: 200px;",
-    strong("Myocardial Infarctiont"),
+      selected = 0
+    ),
+  
     selectInput(
-      inputId  = "basemi2",
-      label    = NULL,
-      choices  = c(0, 1),
-      selected = 0,
-      width    = 80
-    )
-  ),
-           
-  div(
-    style = "display: inline-block;
-            vertical-align: top;
-            width: 200px;",
-    strong("Alcohol consumption"),
+        inputId  = "basemi2",
+        label    = "Have you had myocardial infarction in the past?",
+        choices  = c(0, 1),
+        selected = 0
+    ),
+    
     numericInput(
       inputId = "alcave",
-      label   = NULL,
+      label   = "Number of drinks you consume daily",
       value   = 0,
       min     = 0,
       max     = 40,
-      step    = 1,
-      width   = 80
-    )
-  ),
+      step    = 1
+    ),
   
-  div(
-    style = "display: inline-block;
-            vertical-align: top;
-            width: 200px;",
-    strong("Systolic Blood Pressure"),
+    div(style = "margin-top: 6px"),
+    
     numericInput(
       inputId = "systm",
-      label   = NULL,
+      label   = "Systolic blood pressure",
       value   = 80,
       min     = 50,
       max     = 250,
-      step    = 1,
-      width   = 80
-    )
-  ),
-  
-  div(
-    style = "display: inline-block;
-            vertical-align: top;
-            width: 200px;",
-    strong("Diastolic Blood Pressure"),
+      step    = 1
+    ),
+    
+    div(style = "margin-top: 6px"),
+    
     numericInput(
       inputId = "diastm",
-      label = NULL,
+      label = "Diastolic blood pressure",
       value = 100,
       min = 80,
       max = 250,
-      step = 1,
-      width = 80
-    )
-  ),
-  
-  div(
-    style = "display: inline-block;
-            vertical-align: top;
-            width: 200px;",
-    strong("Levels of NT-proBNP"), 
+      step = 1
+    ),
+    
+    div(style = "margin-top: 6px"),
+    
     numericInput(
       inputId = "nt_pro_bnp",
-      label   = NULL,
+      label   = "Levels of NT-proBNP",
       value   = 25,
       min     = 0,
       max     = 100,
-      step    = 0.1,
-      width   = 80
-    )
-  ),
-  
-  # This introduces the actionButton used to run the calculation
-  actionButton("enter", label = "Calculate Risk")
-  ), # Close column
+      step    = 0.1
+    ),
+    
+    div(style = "margin-top: 6px"),
+    
+    # This introduces the actionButton used to run the calculation
+    actionButton("enter", label = "Calculate Risk")
+    ), # Close column
   
   # Output area
-  # This is the column to the right (3 units wide)
+
+  # This is the column to the right 
   column(4,
     # tabsetPanel introduced 
     tabsetPanel(
       # Get a summary panel
-      tabPanel("SUMMARY",
+      tabPanel("RESULTS",
         textOutput("prediction")
-    ), #Close tabsetPanel
-      # Get the explanation panel
-      tabPanel("EXPLANATION OF THE RESULTS")
-    ) ## Close tabsetPanel
+      ) # Close tabPanel
+    ) # Close tabsetPanel
   ) # Close column
 ) # Close fluidRow
