@@ -20,12 +20,4 @@ fluidRow(
     biomarker score in large prospective population cohorts across different European regions."
     ) 
   ), # Close column
-  
-  # Picture on startpage
-  column(4,
-    # img(src    = 'heart.jpg',
-    #     style  = "width: 100%;
-    #              padding: 0;"
-    # )
-  ) # Close column
 ) # Close fluidRow

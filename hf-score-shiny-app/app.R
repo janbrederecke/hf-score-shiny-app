@@ -7,7 +7,6 @@ library(shiny)
 library(shinythemes)
 library(shinyWidgets)
 library(survival)
-library(pmisc)
 
 # Load Cox-models for prediction
 ## Biomarker Score
