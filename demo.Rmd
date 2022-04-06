@@ -1,3 +1,41 @@
+---
+title: "Demo File for the HF Score App Prototype"
+author: "Jan Brederecke"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+runtime: shiny
+output: html_document
+---
+<style>
+.main-container {
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.shiny-frame{
+  width: 1920px;
+  height: 1080px;
+}
+</style>
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+!!! This file is for demonstration only !!!
+This file demonstrates BASIC functionality of a Shiny app that will be used for
+HF prediction as soon as the prediction algorithm has been finalized (calibrated,
+validated externally etc.).
+
+Looks and functionality can and will be improved as this is only a
+"proof of concept".
+
+This app will be used like a normal webpage with interactive functionality and
+will be made available with the respective article on the HF score.
+
+All texts are placeholders for the sole purpose of demonstration.
+
+```{r, echo = FALSE}
 # This shiny-app calculates the predicted 5-year risk for heart failure
 # Developer: Jan Brederecke
 # The app is based on the research published in ...
@@ -24,7 +62,7 @@ source(paste0(here::here(),
 
 # Define UI for application
 ui <- fluidPage(theme = shinytheme("cosmo"),
-                setBackgroundImage("background.jpg"),
+                setBackgroundImage(src = "https://drive.google.com/uc?id=1qdoowwru1IBPzlRZh-HBI-eKMEUN82_Y"),
                 
                 # Global control of the corners of input fields (not round!)
                 tags$head(
@@ -165,3 +203,4 @@ server <- function(input, output, session) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+```
