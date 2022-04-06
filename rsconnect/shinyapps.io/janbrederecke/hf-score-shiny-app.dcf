@@ -5,7 +5,7 @@ account: janbrederecke
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6032155
-bundleId: 5771903
+bundleId: 5772043
 url: https://janbrederecke.shinyapps.io/hf-score-shiny-app/
-when: 1649277997.08442
-lastSyncTime: 1649277997.08444
+when: 1649280713.79173
+lastSyncTime: 1649280713.79175
