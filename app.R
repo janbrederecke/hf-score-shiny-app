@@ -10,16 +10,13 @@ library(survival)
 
 # Load Cox-models for prediction
 ## Biomarker Score
-load(file = c(paste0(here::here(),
-                     "/hf-score-shiny-app/pred_model_primary.RData")))
+load(file = c("pred_model_primary.RData"))
 
 ## Extended Biomarker Score
-load(file = c(paste0(here::here(),
-                     "/hf-score-shiny-app/pred_model_secondary.RData")))
+load(file = c("pred_model_secondary.RData"))
 
 # Load custom prediction-function to predict using Weibull-baseline-hazard
-source(paste0(here::here(),
-              "/hf-score-shiny-app/Wb_EventProb_nodata.R"))
+source("Wb_EventProb_nodata.R")
 
 # Define UI for application
 ui <- fluidPage(theme = shinytheme("cosmo"),
@@ -50,30 +47,25 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
         navbarPage("THE EUROPEAN HEART FAILURE SCORE RISK CALCULATOR",
                        
             tabPanel("START" ,
-                     source(paste0(here::here(),
-                                   "/hf-score-shiny-app/start.R"))$value
+                     source("start.R")$value
             ),
                         
             navbarMenu("CHOOSE MODEL",
                     
                 tabPanel("BIOMARKER SCORE",
-                         source(paste0(here::here(),
-                                       "/hf-score-shiny-app/bm_score.R"))$value
+                         source("bm_score.R")$value
                 ),
                 tabPanel("EXTENDED BIOMARKER SCORE",
-                         source(paste0(here::here(),
-                                       "/hf-score-shiny-app/bm_score_ext.R"))$value
+                         source("bm_score_ext.R")$value
                 )
             ),
             
             tabPanel("CITE US",
-                     source(paste0(here::here(),
-                                   "/hf-score-shiny-app/cite_us.R"))$value
+                     source("cite_us.R")$value
             ),
                        
             tabPanel("ABOUT",
-                     source(paste0(here::here(),
-                                   "/hf-score-shiny-app/about.R"))$value
+                     source("about.R")$value
             )
         ) # Close navbarPage
     ), # Close shinyUI
