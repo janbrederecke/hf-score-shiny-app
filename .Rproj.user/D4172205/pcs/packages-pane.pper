@@ -1,7 +1,0 @@
-{
-    "installOptions": {
-        "installFromRepository": true,
-        "libraryPath": "/Users/janbrederecke/Library/R/4.0/library",
-        "installDependencies": true
-    }
-}
